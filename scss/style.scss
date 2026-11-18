@@ -1,0 +1,445 @@
+/* =========================================================================
+   STYLE.SCSS — Feuille de style principale, écrite en Sass (SCSS)
+   -------------------------------------------------------------------------
+   POURQUOI DU SASS ? (exigence du projet)
+   Sass apporte au CSS pur : les VARIABLES ($nom), le NESTING (imbrication)
+   et les MIXINS (@mixin/@include). Le .scss se COMPILE en css/style.css,
+   et c'est le .css que lisent les pages.
+
+   IDENTITÉ VISUELLE — « ÉDITORIAL »
+   Parti pris magazine : fond papier chaud, titres en serif expressif
+   (Fraunces), un accent corail franc, des filets fins et une numérotation
+   de sections comme un sommaire. L'objet est le contenu, mis en page avec
+   le soin d'une revue imprimée.
+   ========================================================================= */
+
+/* 1. VARIABLES — PALETTE -------------------------------------------------
+   Ambiance SOMBRE & MODERNE : fond anthracite, texte clair, accent bleu.
+   (Les noms de variables restent "papier/encre" pour garder une seule
+   logique dans tout le fichier, mais ils portent désormais des tons sombres.) */
+$papier:      #121318;   // FOND principal sombre (anthracite profond)
+$papier-alt:  #1A1C23;   // sections alternées, un ton plus clair
+$encre:       #F2F3F5;   // TEXTE clair (sur fond sombre)
+$encre-2:     #9A9CA6;   // texte secondaire (gris clair)
+$corail:      #3B82F6;   // ACCENT bleu franc (la signature)
+$corail-fonce:#2563EB;   // bleu au survol
+$corail-pale: #1E293B;   // bleu très sombre, fonds de pastille
+$trait:       #2A2C36;   // filets fins sur fond sombre
+$trait-sombre:#363945;   // filets un peu plus clairs (sur cartes)
+
+$titre: 'Fraunces', Georgia, serif;         // titres : serif à caractère
+$corps: 'Inter', sans-serif;                // corps : lisible, neutre
+$mono:  'Space Grotesk', sans-serif;        // libellés techniques / numéros
+
+$t: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* 2. MIXINS -------------------------------------------------------------- */
+@mixin flex-center { display: flex; align-items: center; justify-content: center; }
+
+/* 3. RESET --------------------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: $corps;
+  color: $encre;
+  background-color: $papier;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titres en serif. line-height serré et interlettrage léger pour le cachet. */
+h1, h2, h3 { font-family: $titre; font-weight: 600; line-height: 1.02; }
+
+a { color: $encre; text-decoration: none; transition: color $t; }
+
+img { max-width: 100%; display: block; }
+
+.conteneur { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+.section { padding: 110px 0; }
+.section--alt { background-color: $papier-alt; }
+
+/* 4. NAVBAR STICKY (exigence) -------------------------------------------
+   sticky + top:0 => collée en haut au scroll. Fond papier translucide flou. */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba($papier, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $trait;
+  padding: 16px 0;
+
+  .navbar-brand {
+    font-family: $titre;
+    font-weight: 600;
+    font-size: 1.35rem;
+    font-style: italic;              // le nom en italique = touche éditoriale
+    letter-spacing: -0.01em;
+  }
+
+  .nav-link {
+    position: relative;
+    color: $encre !important;
+    font-family: $mono;              // liens en sans : contraste avec le serif
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin: 0 4px;
+    padding: 4px 10px !important;
+
+    &::after {                       // filet corail qui pousse au survol
+      content: "";
+      position: absolute;
+      left: 10px; bottom: 2px;
+      width: 0; height: 2px;
+      background-color: $corail;
+      transition: width $t;
+    }
+    &:hover::after, &.active::after { width: calc(100% - 20px); }
+  }
+}
+
+/* 5. HERO — l'élément mémorable -----------------------------------------
+   Mise en page éditoriale : nom en très grand serif, nom de famille en
+   italique corail. Photo à droite. Un filet en haut comme un ours de revue. */
+.hero {
+  padding: 70px 0 90px;
+  border-bottom: 1px solid $trait;
+
+  &__grille {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  // ligne d'info en haut (date / rôle), façon manchette de journal
+  &__ours {
+    display: flex;
+    justify-content: space-between;
+    font-family: $mono;
+    font-size: 0.82rem;
+    color: $encre-2;
+    padding-bottom: 20px;
+    margin-bottom: 42px;
+    border-bottom: 1px solid $trait;
+  }
+
+  &__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: $mono;
+    font-size: 0.85rem;
+    color: $corail;
+    font-weight: 500;
+    margin-bottom: 20px;
+    &::before {
+      content: "";
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background-color: $corail;
+      box-shadow: 0 0 0 0 rgba($corail, 0.5);
+      animation: pulse 2.4s infinite;
+    }
+  }
+
+  h1 {
+    font-size: clamp(3rem, 8.5vw, 5.6rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  &__nom-fam { font-style: italic; color: $corail; }  // "Ibala" en italique corail
+
+  &__sous {
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    color: $encre-2;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  &__devise { font-style: italic; color: $encre; }
+
+  &__photo {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 4 / 5;             // portrait, format revue
+    object-fit: cover;
+    border-radius: 6px;
+    justify-self: end;
+    // double filet décoratif autour de la photo
+    border: 1px solid $encre;
+    box-shadow: 10px 10px 0 0 $corail; // ombre portée corail = signature forte
+  }
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba($corail, 0.5); }
+  70%  { box-shadow: 0 0 0 11px rgba($corail, 0); }
+  100% { box-shadow: 0 0 0 0 rgba($corail, 0); }
+}
+
+/* Boutons */
+.hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-accent {
+  background-color: $encre;
+  color: $papier;
+  border: 2px solid $encre;
+  padding: 13px 28px;
+  border-radius: 4px;
+  font-family: $mono;
+  font-weight: 500;
+  transition: all $t;
+  &:hover { background-color: $corail; border-color: $corail; }
+}
+.btn-ligne {
+  background: transparent;
+  color: $encre;
+  border: 2px solid $encre;
+  padding: 13px 28px;
+  border-radius: 4px;
+  font-family: $mono;
+  font-weight: 500;
+  transition: all $t;
+  &:hover { background-color: $encre; color: $papier; }
+}
+
+/* 6. EN-TÊTES DE SECTION -------------------------------------------------
+   Numérotés comme un sommaire de revue (pertinent : parcours 01→03). */
+.entete {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 54px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid $encre;
+
+  &__num {
+    font-family: $mono;
+    font-size: 0.95rem;
+    color: $corail;
+    font-weight: 600;
+  }
+  &__titre { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; }
+}
+
+/* 7. BIO ----------------------------------------------------------------- */
+.bio {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: start;
+
+  &__repere {
+    border-top: 1px solid $trait;
+    padding-top: 13px;
+    margin-bottom: 24px;
+    &-cle { font-family: $mono; font-size: 0.78rem; color: $encre-2; }
+    &-val { font-size: 1.1rem; font-weight: 500; margin-top: 3px; }
+  }
+  // belle lettrine sur le premier paragraphe = signature éditoriale
+  &__texte p:first-of-type::first-letter {
+    font-family: $titre;
+    font-size: 3.4rem;
+    font-weight: 600;
+    float: left;
+    line-height: 0.8;
+    padding: 6px 12px 0 0;
+    color: $corail;
+  }
+  &__texte p { margin-bottom: 18px; font-size: 1.1rem; }
+}
+
+/* 8. GRILLE DE COMPÉTENCES (CSS GRID — exigence) ------------------------ */
+.grille-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 0;                            // pas de gap : filets partagés façon tableau
+  border: 1px solid $trait;
+}
+.carte-skill {
+  padding: 30px;
+  border: 1px solid $trait;
+  margin: -0.5px;                    // les bordures se superposent en filets fins
+  transition: background-color $t;
+
+  &:hover { background-color: $papier; }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $trait;
+    // numéro ou tiret corail en serif
+    span { color: $corail; font-style: italic; }
+  }
+  ul { list-style: none; }
+  li {
+    padding: 6px 0;
+    color: $encre-2;
+    font-size: 0.98rem;
+    font-family: $corps;
+    display: flex; align-items: baseline; gap: 9px;
+    &::before { content: "—"; color: $corail; }  // tiret corail
+  }
+}
+
+/* 9. GRILLE DE PROJETS (CSS GRID) ---------------------------------------
+   Cartes sombres sur fond clair : contraste éditorial fort. */
+.grille-projets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.carte-projet {
+  background-color: $papier-alt;        // carte un ton plus clair que le fond
+  color: $encre;
+  border: 1px solid $trait;
+  border-radius: 6px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform $t, border-color $t;
+
+  // coin corail en haut à droite, révélé au survol
+  &::after {
+    content: "";
+    position: absolute; top: -40px; right: -40px;
+    width: 80px; height: 80px;
+    background-color: $corail;
+    transform: rotate(45deg) scale(0);
+    transform-origin: center;
+    transition: transform $t;
+  }
+  &:hover { transform: translateY(-6px); }
+  &:hover::after { transform: rotate(45deg) scale(1); }
+
+  &__tag {
+    align-self: flex-start;
+    font-family: $mono;
+    font-size: 0.75rem;
+    color: $corail;
+    border: 1px solid $trait-sombre;
+    padding: 4px 12px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  h3 { font-size: 1.45rem; font-weight: 600; margin-bottom: 12px; }
+  p { color: #C9C2BA; flex-grow: 1; font-size: 0.98rem; font-family: $corps; }
+
+  &__lien {
+    color: $papier;
+    font-family: $mono;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 22px;
+    display: inline-flex; align-items: center; gap: 8px;
+    position: relative; z-index: 1;
+    transition: gap $t, color $t;
+    &:hover { color: $corail; gap: 14px; }
+  }
+}
+
+/* 10. FORMULAIRE -------------------------------------------------------- */
+.form-contact {
+  max-width: 640px;
+
+  .form-label {
+    display: block;
+    font-family: $mono;
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $trait;   // champs en lignes, style formulaire papier
+    border-radius: 0;
+    padding: 12px 2px;
+    margin-bottom: 26px;
+    font-family: $corps;
+    font-size: 1rem;
+    transition: border-color $t;
+    &:focus { border-color: $corail; box-shadow: none; outline: none; }
+  }
+  textarea.form-control { border: 1px solid $trait; border-radius: 6px; padding: 14px; }
+}
+
+/* 11. PAGE CV ----------------------------------------------------------- */
+.cv-header {
+  padding-bottom: 30px;
+  border-bottom: 3px double $encre;   // double filet = cachet éditorial
+  margin-bottom: 46px;
+
+  h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 600; }
+  .cv-titre { color: $corail; font-family: $mono; font-size: 1.1rem; margin-top: 8px; }
+}
+.cv-bloc {
+  margin-bottom: 46px;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    span { color: $corail; font-style: italic; }
+  }
+}
+.cv-item {
+  padding-left: 24px;
+  border-left: 2px solid $trait;
+  margin-bottom: 24px;
+  padding-bottom: 4px;
+
+  &__titre { font-family: $titre; font-weight: 600; font-size: 1.15rem; }
+  &__meta  { color: $encre-2; font-family: $mono; font-size: 0.85rem; margin: 3px 0 7px; }
+}
+
+/* 12. FOOTER ------------------------------------------------------------ */
+.footer {
+  background-color: $encre;
+  color: $papier;
+  padding: 80px 0 40px;
+
+  &__devise {
+    font-family: $titre;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 600;
+    margin-bottom: 40px;
+    max-width: 560px;
+    span { font-style: italic; color: $corail; }
+  }
+  &__liens { display: flex; flex-wrap: wrap; gap: 26px; margin-bottom: 44px; }
+  a {
+    color: #C9C2BA;
+    font-family: $mono;
+    font-size: 0.92rem;
+    &:hover { color: $corail; }
+  }
+  &__copy {
+    border-top: 1px solid $trait-sombre;
+    padding-top: 24px;
+    color: $encre-2;
+    font-family: $mono;
+    font-size: 0.85rem;
+  }
+}
+
+/* 13. RESPONSIVE -------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .hero { padding: 40px 0 70px; }
+  .hero__grille { grid-template-columns: 1fr; gap: 40px; }
+  .hero__photo { order: -1; max-width: 240px; justify-self: start; box-shadow: 8px 8px 0 0 $corail; }
+  .hero__ours { flex-direction: column; gap: 4px; }
+  .bio { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* 14. ACCESSIBILITÉ : réduire les animations ---------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
