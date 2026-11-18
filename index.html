@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beruch Ibala, Data Analyst & Junior Data Scientist</title>
+  <meta name="description" content="Portfolio di Beruch Ibala, Data Analyst e Junior Data Scientist: progetti SQL, Python, Power BI e Tableau.">
+
+  <!-- FAVICON (requisito) : SVG inline, quadrato scuro con lettera B blu -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231C1917'/><text x='50' y='74' font-size='66' fill='%233B82F6' text-anchor='middle' font-family='Georgia' font-style='italic' font-weight='bold'>B</text></svg>">
+
+  <!-- OPEN GRAPH (requisito) : anteprima quando il link è condiviso -->
+  <meta property="og:title" content="Beruch Ibala, Data Analyst & Junior Data Scientist">
+  <meta property="og:description" content="Dai dati alle decisioni. Progetti SQL, Python, Power BI, Tableau.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/photoprofil.jpg">
+  <meta property="og:url" content="https://TON-USERNAME.github.io/">
+
+  <!-- FONT : Fraunces (titoli serif) + Inter (testo) + Space Grotesk (etichette) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- BOOTSTRAP (requisito : framework) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Il nostro stile (compilato dal SCSS), DOPO Bootstrap per sovrascriverlo -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR STICKY ===== -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Beruch Ibala</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#menu" aria-controls="menu"
+              aria-expanded="false" aria-label="Apri il menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#competenze">Competenze</a></li>
+          <li class="nav-item"><a class="nav-link" href="#progetti">Progetti</a></li>
+          <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO : impaginazione editoriale (nome serif + foto, ombra blu) ===== -->
+  <header class="hero">
+    <div class="conteneur">
+      <!-- riga informativa in alto, come la testata di una rivista -->
+      <div class="hero__ours">
+        <span>Portfolio Data &amp; Intelligenza Artificiale</span>
+        <span>Italia 2026</span>
+      </div>
+
+      <div class="hero__grille">
+        <!-- Colonna sinistra : testo -->
+        <div class="hero__texte">
+          <span class="hero__kicker">Disponibile per nuove opportunità</span>
+          <h1>Beruch <span class="hero__nom-fam">Ibala</span></h1>
+          <p class="hero__sous">
+            Data Analyst &amp; Junior Data Scientist.
+            <span class="hero__devise">Dai dati alle decisioni.</span>
+          </p>
+          <div class="hero__actions">
+            <a href="#progetti" class="btn-accent">I miei progetti</a>
+            <a href="cv.html" class="btn-ligne">Il mio CV</a>
+          </div>
+        </div>
+        <!-- Colonna destra : foto (inserisci il tuo ritratto in img/photoprofil.jpg) -->
+        <img src="img/photoprofil.jpg" alt="Foto di Beruch Ibala" class="hero__photo">
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 01 BIO : griglia 2 colonne (dati | testo con capolettera) ===== -->
+  <section class="section" id="bio">
+    <div class="conteneur">
+      <div class="entete">
+        <span class="entete__num">01</span>
+        <h2 class="entete__titre">Chi sono</h2>
+      </div>
+
+      <div class="bio">
+        <div class="bio__reperes">
+          <div class="bio__repere">
+            <div class="bio__repere-cle">Formazione</div>
+            <div class="bio__repere-val">Master IA e Agenti IA</div>
+          </div>
+          <div class="bio__repere">
+            <div class="bio__repere-cle">Laurea</div>
+            <div class="bio__repere-val">Economia Aziendale</div>
+          </div>
+          <div class="bio__repere">
+            <div class="bio__repere-cle">Sede</div>
+            <div class="bio__repere-val">Italia</div>
+          </div>
+          <div class="bio__repere">
+            <div class="bio__repere-cle">Lingue</div>
+            <div class="bio__repere-val">FR IT EN</div>
+          </div>
+        </div>
+
+        <div class="bio__texte">
+          <p>
+            Sono Beruch Ibala, studente congolese in Italia. Laureato in Economia
+            Aziendale all'Università di Genova, sto completando il mio Master in IA e
+            Agenti IA per il business, un percorso che unisce lo sviluppo web, la data
+            e l'automazione tramite la creazione di agenti IA.
+          </p>
+          <p>
+            Ciò che mi appassiona dei dati è la loro capacità di produrre soluzioni
+            concrete : aiutare le aziende a prendere decisioni strategiche migliori e a
+            comprendere meglio la propria attività. Mi interesso anche all'automazione
+            tramite gli agenti IA, un ambito in forte crescita su cui mi sto formando.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02 COMPETENZE : griglia CSS ===== -->
+  <section class="section section--alt" id="competenze">
+    <div class="conteneur">
+      <div class="entete">
+        <span class="entete__num">02</span>
+        <h2 class="entete__titre">Competenze</h2>
+      </div>
+
+      <div class="grille-skills">
+        <div class="carte-skill">
+          <h3>Data <span>&amp; BI</span></h3>
+          <ul>
+            <li>SQL (PostgreSQL, MySQL)</li>
+            <li>Python (pandas, scikit-learn)</li>
+            <li>Power BI (DAX)</li>
+            <li>Tableau</li>
+            <li>Excel, Looker Studio</li>
+          </ul>
+        </div>
+        <div class="carte-skill">
+          <h3>Sviluppo <span>web</span></h3>
+          <ul>
+            <li>HTML e CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+          </ul>
+        </div>
+        <div class="carte-skill">
+          <h3>Intelligenza <span>artificiale</span></h3>
+          <ul>
+            <li>Prompt engineering</li>
+            <li>n8n</li>
+            <li>LangChain</li>
+            <li>CrewAI</li>
+          </ul>
+        </div>
+        <div class="carte-skill">
+          <h3>Soft skills</h3>
+          <ul>
+            <li>Problem solving</li>
+            <li>Lavoro di squadra</li>
+            <li>Rigore e precisione</li>
+            <li>Creatività</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03 PROGETTI : griglia CSS, card scure ===== -->
+  <section class="section" id="progetti">
+    <div class="conteneur">
+      <div class="entete">
+        <span class="entete__num">03</span>
+        <h2 class="entete__titre">Progetti</h2>
+      </div>
+
+      <div class="grille-projets">
+        <article class="carte-projet">
+          <span class="carte-projet__tag">SQL</span>
+          <h3>CaféCo, pulizia e analisi</h3>
+          <p>Affidabilizzazione di 10.000 transazioni con il 69% di errori, ricostruzione per regole di business con oltre il 95% recuperato, poi analisi delle vendite in PostgreSQL.</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch/beruch-consulting-mission-005" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+
+        <article class="carte-projet">
+          <span class="carte-projet__tag">Tableau</span>
+          <h3>SportCo, stagione di calcio</h3>
+          <p>Dashboard interattiva su 5 campionati : ciò che la classifica non rivela. Preparazione dei dati in Python.</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch/beruch-consulting-mission-009" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+
+        <article class="carte-projet">
+          <span class="carte-projet__tag">Power BI</span>
+          <h3>BankCo, rischio di credito</h3>
+          <p>Analisi di 255.000 prestiti : individuazione e gerarchizzazione dei fattori di rischio di insolvenza (misure DAX).</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch/beruch-consulting-mission-006" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+
+        <article class="carte-projet">
+          <span class="carte-projet__tag">Machine Learning</span>
+          <h3>AutoCo, stima dei prezzi</h3>
+          <p>Modello di regressione (scikit-learn) per stimare il prezzo di auto usate, con funzione di stima riutilizzabile.</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch/beruch-consulting-mission-007" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+
+        <article class="carte-projet">
+          <span class="carte-projet__tag">Python, pandas</span>
+          <h3>Google Play, analisi di mercato</h3>
+          <p>Analisi esplorativa di oltre 10.000 app : concorrenza e domanda, media e mediana, strategia di posizionamento guidata dai dati.</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+
+        <article class="carte-projet">
+          <span class="carte-projet__tag">Machine Learning</span>
+          <h3>AirCo, soddisfazione passeggeri</h3>
+          <p>Classificazione (regressione logistica e Random Forest), modelli segmentati per classe ed esplicabilità con SHAP.</p>
+          <a class="carte-projet__lien" href="https://github.com/beruchbordey-glitch" target="_blank" rel="noopener">Vai al repository</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="conteneur">
+      <p class="footer__devise">Dai dati alle <span>decisioni.</span></p>
+      <div class="footer__liens">
+        <a href="https://github.com/beruchbordey-glitch" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://public.tableau.com/app/profile/beruch.bordey.mouboungoulou.de.ibala" target="_blank" rel="noopener">Tableau Public</a>
+        <a href="https://www.linkedin.com/in/beruch-ibala/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="contact.html">Contatti</a>
+      </div>
+      <p class="footer__copy">© 2026 Beruch Ibala. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <!-- JS Bootstrap : fa funzionare il menu a tendina su mobile (unico JS del sito) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
