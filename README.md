@@ -2,7 +2,7 @@
 
 Sito portfolio personale realizzato in HTML, CSS (Sass) e Bootstrap, nell'ambito del Master in IA e Agenti IA per il Business (Università degli Studi Guglielmo Marconi con start2impact).
 
-**Sito online:** https://TON-USERNAME.github.io/  *(da aggiornare dopo la pubblicazione su GitHub Pages)*
+Sito online: https://beruchbordey-glitch.github.io/progetto-HTML-E-CSS/
 
 ## Pagine
 
