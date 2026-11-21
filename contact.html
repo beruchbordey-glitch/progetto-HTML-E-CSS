@@ -111,7 +111,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     // inizializzazione con la chiave pubblica
-    emailjs.init("AIMg-W1TG12jsOikS");
+    emailjs.init({ publicKey: "AIMg-W1TG12jsOikS" });
 
     const form  = document.getElementById("form-contact");
     const btn   = document.getElementById("btn-invia");
@@ -123,8 +123,15 @@
       btn.textContent = "Invio in corso...";
       stato.textContent = "";
 
-      // invia il contenuto del form tramite Service ID e Template ID
-      emailjs.sendForm("service_qch1b4b", "template_0vfqluy", form)
+      // dati del form, inviati esplicitamente (metodo send, più affidabile)
+      const parametri = {
+        nome:      document.getElementById("nome").value,
+        email:     document.getElementById("email").value,
+        oggetto:   document.getElementById("oggetto").value,
+        messaggio: document.getElementById("messaggio").value
+      };
+
+      emailjs.send("service_qch1b4b", "template_0vfqluy", parametri)
         .then(function () {
           stato.style.color = "#3B82F6";
           stato.textContent = "Messaggio inviato, grazie ! Ti risponderò presto.";
@@ -132,9 +139,11 @@
           btn.disabled = false;
           btn.textContent = "Invia il messaggio";
         })
-        .catch(function () {
+        .catch(function (err) {
+          // mostra il dettaglio tecnico per aiutare la diagnosi
           stato.style.color = "#E8591A";
           stato.textContent = "Si è verificato un errore. Riprova o scrivimi su LinkedIn.";
+          console.error("EmailJS error:", err);
           btn.disabled = false;
           btn.textContent = "Invia il messaggio";
         });
