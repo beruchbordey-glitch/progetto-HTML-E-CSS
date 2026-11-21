@@ -56,11 +56,11 @@
       </p>
 
       <!-- =================================================================
-           FORM
+           FORM collegato a EmailJS
            "required" (REQUISITO) rende i campi obbligatori.
            type="email" verifica il formato dell'indirizzo.
            Nessuna email mostrata in chiaro (anti-spam).
-           OPZIONE EmailJS (esercizio facoltativo) : esempio commentato in fondo.
+           L'invio reale avviene tramite EmailJS (vedi script in fondo).
            ================================================================= -->
       <form class="form-contact" id="form-contact">
         <label for="nome" class="form-label">Nome</label>
@@ -76,8 +76,11 @@
         <textarea class="form-control" id="messaggio" name="messaggio" rows="5" placeholder="Il tuo messaggio" required></textarea>
 
         <div class="mt-2">
-          <button type="submit" class="btn-accent">Invia il messaggio</button>
+          <button type="submit" class="btn-accent" id="btn-invia">Invia il messaggio</button>
         </div>
+
+        <!-- message de confirmation / erreur affiché après l'envoi -->
+        <p id="form-stato" style="margin-top:18px;font-family:'Space Grotesk',sans-serif;font-size:0.95rem;"></p>
       </form>
     </div>
   </section>
@@ -90,6 +93,7 @@
         <a href="https://github.com/beruchbordey-glitch" target="_blank" rel="noopener">GitHub</a>
         <a href="https://public.tableau.com/app/profile/beruch.bordey.mouboungoulou.de.ibala" target="_blank" rel="noopener">Tableau Public</a>
         <a href="https://www.linkedin.com/in/beruch-ibala/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://wa.me/393343072585" target="_blank" rel="noopener">WhatsApp</a>
         <a href="contact.html">Contatti</a>
       </div>
       <p class="footer__copy">© 2026 Beruch Ibala. Tutti i diritti riservati.</p>
@@ -99,18 +103,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- =====================================================================
-       ESEMPIO EmailJS (facoltativo), decommenta e inserisci le tue chiavi
-       =====================================================================
+       EmailJS : invio reale del form alla mia email
+       1) libreria EmailJS
+       2) inizializzazione con la Public Key
+       3) all'invio del form, EmailJS manda l'email usando Service e Template
+       ===================================================================== -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    emailjs.init("LA_TUA_PUBLIC_KEY");
-    document.getElementById("form-contact").addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.sendForm("IL_TUO_SERVICE_ID", "IL_TUO_TEMPLATE_ID", this)
-        .then(() => { alert("Messaggio inviato, grazie !"); this.reset(); })
-        .catch(() => alert("Si è verificato un errore, riprova."));
+    // inizializzazione con la chiave pubblica
+    emailjs.init("AIMg-W1TG12jsOikS");
+
+    const form  = document.getElementById("form-contact");
+    const btn   = document.getElementById("btn-invia");
+    const stato = document.getElementById("form-stato");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();                 // evita il ricaricamento della pagina
+      btn.disabled = true;
+      btn.textContent = "Invio in corso...";
+      stato.textContent = "";
+
+      // invia il contenuto del form tramite Service ID e Template ID
+      emailjs.sendForm("service_qch1b4b", "template_0vfqluy", form)
+        .then(function () {
+          stato.style.color = "#3B82F6";
+          stato.textContent = "Messaggio inviato, grazie ! Ti risponderò presto.";
+          form.reset();
+          btn.disabled = false;
+          btn.textContent = "Invia il messaggio";
+        })
+        .catch(function () {
+          stato.style.color = "#E8591A";
+          stato.textContent = "Si è verificato un errore. Riprova o scrivimi su LinkedIn.";
+          btn.disabled = false;
+          btn.textContent = "Invia il messaggio";
+        });
     });
   </script>
-  -->
 </body>
 </html>
